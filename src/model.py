@@ -20,8 +20,6 @@ from scipy.spatial.distance import cosine
 
 
 
-
-
 '''
 Use PCA to reduce dimensionality to graph the TFIDF scores in 2D.
 '''
@@ -63,7 +61,7 @@ Remove rows with empty values
 def preprocess(df):
 	df = df[df.AbstractText.str.contains("None") == False]
 	df = df[df["AbstractText"] != "[]"]
-	df.to_csv("./data/retracted_citations.csv")
+	df.to_csv("../data/retracted_citations.csv")
 
 
 
@@ -236,7 +234,7 @@ def vectorize(cited, target):
 
 
 def main():
-	df = pd.read_csv('data/retracted_citations.csv')
+	df = pd.read_csv('../data/retracted_citations.csv')
 	preprocess(df)
 
 	word_count_clustering(df)

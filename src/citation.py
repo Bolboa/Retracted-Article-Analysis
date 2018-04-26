@@ -99,7 +99,7 @@ def extract_abstract(cit):
 	print(len(total_abstract))
 
 	# save the data which will be merged later
-	create_csv("./data/retracted_ids.csv", retracted_ids)
+	create_csv("../data/retracted_ids.csv", retracted_ids)
 
 	# create column header
 	df_abstract = pd.DataFrame(columns=['AbstractText'])
@@ -107,7 +107,7 @@ def extract_abstract(cit):
 		
 	# convert the embeded list into multiple columns
 	df_abstract = pd.DataFrame(df_abstract['AbstractText'].values.tolist())
-	df_abstract.to_csv("./data/abstract_split.csv")
+	df_abstract.to_csv("../data/abstract_split.csv")
 
 
 '''
@@ -115,7 +115,7 @@ Merge PMIDs with corresponding article abstracts from articles that cite the ret
 '''
 def merged_csv(df1, df2):
 	merged = pd.merge(df1, df2, left_index=True, right_index=True)
-	merged.to_csv("./data/abstract_ids.csv")
+	merged.to_csv("../data/abstract_ids.csv")
 
 
 '''
@@ -123,21 +123,21 @@ Merge the origincal CSV with the attributes corresponding to the retracted artic
 '''
 def merge_retract_cited(retracted, abstract):
 	df_merge = pd.merge(retracted, abstract, how='inner', on=['PMID'])
-	df_merge.to_csv("./data/retracted_citations.csv")
+	df_merge.to_csv("../data/retracted_citations.csv")
 
 
 
 def main():
 		
-	cit = pd.read_csv("data/citations.csv")
+	cit = pd.read_csv("../data/citations.csv")
 	extract_abstract(cit)
 
-	df1 = pd.read_csv("data/retracted_ids.csv", names=['PMID'])
+	df1 = pd.read_csv("../data/retracted_ids.csv", names=['PMID'])
 	df2 = pd.read_csv("data/abstract_split.csv", names=['AbstractCited1', 'AbstractCited2', 'AbstractCited3'])
 	merged_csv(df1, df2)
 
-	retracted = pd.read_csv("data/retracted.csv")
-	abstract = pd.read_csv("data/abstract_ids.csv")
+	retracted = pd.read_csv("../data/retracted.csv")
+	abstract = pd.read_csv("../data/abstract_ids.csv")
 
 	merge_retract_cited(retracted, abstract)
 	
