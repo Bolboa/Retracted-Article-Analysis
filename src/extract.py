@@ -313,6 +313,6 @@ def main():
 			csv_key += list(in_one_not_other)
 
 	# write the extrracted data to a CSV file
-	create_csv("../data/retracted.csv", csv_key, all_children)
+	create_csv("./data/retracted.csv", csv_key, all_children)
 
 main()
